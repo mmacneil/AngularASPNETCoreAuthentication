@@ -7,9 +7,15 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
-    <PackageReference Include="microsoft.aspnetcore.staticfiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="microsoft.aspnetcore.staticfiles" Version="1.1.1" />   
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.sqlserver.Design" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />  
   </ItemGroup>
   <Target Name="AngularBuild" AfterTargets="Build">
-  <Exec Command="npm run build" />
-   </Target>
+    <Exec Command="npm run build" />
+  </Target>
 </Project>
