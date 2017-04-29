@@ -37,9 +37,9 @@ public class JwtIssuerOptions
         public DateTime IssuedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        /// Set the timespan the token will be valid for (default is 5 min/300 seconds)
+        /// Set the timespan the token will be valid for (default is 120 min)
         /// </summary>
-        public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(5);
+        public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(120);
 
     
 

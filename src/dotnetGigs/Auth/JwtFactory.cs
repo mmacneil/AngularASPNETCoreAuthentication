@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 namespace DotNetGigs.Auth
 { 
  public class JwtFactory : IJwtFactory
-    {
+ {
         private readonly JwtIssuerOptions _jwtOptions;
 
         public JwtFactory(IOptions<JwtIssuerOptions> jwtOptions)
@@ -34,8 +34,8 @@ namespace DotNetGigs.Auth
                 issuer: _jwtOptions.Issuer,
                 audience: _jwtOptions.Audience,
                 claims: claims,
-                //notBefore: _jwtOptions.NotBefore,
-                //expires: _jwtOptions.Expiration,
+                notBefore: _jwtOptions.NotBefore,
+                expires: _jwtOptions.Expiration,
                 signingCredentials: _jwtOptions.SigningCredentials);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
