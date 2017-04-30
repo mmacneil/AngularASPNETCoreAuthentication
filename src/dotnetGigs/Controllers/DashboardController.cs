@@ -18,7 +18,7 @@ namespace DotNetGigs
         [HttpGet("home")]
         public IActionResult GetHome()
         {
-            return new OkObjectResult(new { DisplayName = "Mark", CompanyName = "A company" });
+            return new OkObjectResult(new { Message = "This is secure data!" });
         }
     }
 }
