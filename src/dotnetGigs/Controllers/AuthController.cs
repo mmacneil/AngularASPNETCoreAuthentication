@@ -12,7 +12,7 @@ using DotNetGigs.Helpers;
 using System.Security.Claims;
 using System.Linq;
 
-namespace DogNetGigs.Controllers
+namespace DotNetGigs.Controllers
 {
 
     [Route("api/[controller]")]

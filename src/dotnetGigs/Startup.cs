@@ -1,5 +1,5 @@
 ﻿
-
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +15,11 @@ using DotNetGigs.Auth;
 using DotNetGigs.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
 using DotNetGigs.Helpers;
+using Microsoft.AspNetCore.Diagnostics;
+using DotNetGigs.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetGigs
 {
@@ -57,7 +61,7 @@ namespace DotNetGigs
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
 
-              // api user claim policy
+            // api user claim policy
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
@@ -90,6 +94,48 @@ namespace DotNetGigs
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseExceptionHandler(
+            builder =>
+            {
+                builder.Run(
+                  async context =>
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
+                    var error = context.Features.Get<IExceptionHandlerFeature>();
+                    if (error != null)
+                    {
+                        context.Response.AddApplicationError(error.Error.Message);
+                        await context.Response.WriteAsync(error.Error.Message).ConfigureAwait(false);
+                    }
+                  });
+            });
+
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+
+                ValidateAudience = true,
+                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _signingKey,
+
+                RequireExpirationTime = false,
+                ValidateLifetime = false,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            });
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
