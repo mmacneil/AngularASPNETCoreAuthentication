@@ -4,20 +4,26 @@
       </button>
       <a class="navbar-brand" href="#">dotnetGigs</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      
+        <ul *ngIf="status" class="navbar-nav mr-auto">
+          <li class="nav-item">
+           	<a class="nav-link" (click)="logout()" href="#">Logoff</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
+          <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Dashboard</a> 
+          </li>         
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
+      <ul *ngIf="!status" class="nav navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" routerLinkActive="active" routerLink="/register">Sign Up</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" routerLinkActive="active" routerLink="/login">Login</a>
+			</li>
+		  </ul> 
       </div>
     </nav>
+
+
+ 

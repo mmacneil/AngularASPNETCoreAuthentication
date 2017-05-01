@@ -1,5 +1,27 @@
-/* Show it is fixed to the top */
 body {
-  min-height: 75rem; 
-  padding-top: 4.5rem;
+  padding-top: 5rem;
+  background-color:#f9f9f9
 }
+
+.container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.card {
+    box-shadow: 0 2px 3px rgba(0,0,0,.05);
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 3px
+}
+
+.card-title {
+    margin: 0 !important;
+    font-size: 1.25rem
+}
+
+.bg-white{background: #fff}
