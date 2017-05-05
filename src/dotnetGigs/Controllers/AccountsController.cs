@@ -42,7 +42,7 @@ namespace DotNetGigs.Controllers
             await _appDbContext.JobSeekers.AddAsync(new JobSeeker{IdentityId=userIdentity.Id, Location=model.Location});
             await _appDbContext.SaveChangesAsync();
             
-            return new OkResult();
+            return new OkObjectResult("Account created");
         }
     }
 }
