@@ -45,7 +45,7 @@ namespace DotNetGigs
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly("DotNetGigs")));
+                b => b.MigrationsAssembly("dotnetGigs")));
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
