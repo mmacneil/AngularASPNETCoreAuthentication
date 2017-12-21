@@ -1,5 +1,4 @@
-body {
-  padding-top: 5rem;
+body {  
   background-color:#f9f9f9
 }
 
@@ -16,7 +15,8 @@ body {
     position: relative;
     background-color: #fff;
     border: 1px solid #eee;
-    border-radius: 3px
+    border-radius: 3px;
+    padding:10px
 }
 
 .card-title {
